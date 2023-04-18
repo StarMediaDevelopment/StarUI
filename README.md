@@ -1,2 +1,2 @@
-# StarMenu
-An inventory menu library for Spigot Plugins
+# StarUI
+An inventory UI library for Spigot Plugins
