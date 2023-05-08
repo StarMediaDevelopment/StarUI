@@ -5,8 +5,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.starmediadev.plugins</groupId>
-    <artifactId>starmenu</artifactId>
+    <groupId>com.starmediadev</groupId>
+    <artifactId>starui</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     
@@ -22,9 +22,6 @@
         <maven.plugin.surefire.version>2.22.0</maven.plugin.surefire.version>
         <starlib.version>1.5-SNAPSHOT</starlib.version>
         <minecraft.version>1.19.4-R0.1-SNAPSHOT</minecraft.version>
-        <starclock.version>1.0-SNAPSHOT</starclock.version>
-        <starsql.version>1.0-SNAPSHOT</starsql.version>
-        <starmclib.version>1.0-SNAPSHOT</starmclib.version>
     </properties>
 
     <build>
@@ -89,25 +86,13 @@
         <dependency>
             <groupId>com.starmediadev</groupId>
             <artifactId>starmclib</artifactId>
-            <version>${starmclib.version}</version>
+            <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>${minecraft.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.starmediadev</groupId>
-            <artifactId>starsql</artifactId>
-            <version>${starsql.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.starmediadev</groupId>
-            <artifactId>starclock</artifactId>
-            <version>${starclock.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
