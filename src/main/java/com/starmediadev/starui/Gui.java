@@ -8,6 +8,7 @@ import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.Inventory;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public class Gui implements InventoryHandler {
     
@@ -88,12 +89,21 @@ public class Gui implements InventoryHandler {
     
     @Override
     public void onClick(InventoryClickEvent e) {
-        if (options.allowInsert()) {
-            
+        if (e.getRawSlot() != e.getSlot()) {
+            e.setCancelled(true);
+            return;
         }
         
-        if (options.allowTake()) {
-            
+        if (!options.allowInsert()) {
+            if (e.getClick() == ClickType.DROP || e.getClick() == ClickType.CONTROL_DROP) {
+                e.setCancelled(true);
+            }
+        }
+        
+        if (!options.allowTake()) {
+            if (Stream.of(ClickType.LEFT, ClickType.SHIFT_LEFT, ClickType.RIGHT, ClickType.SHIFT_RIGHT).anyMatch(clickType -> e.getClick() == clickType)) {
+                e.setCancelled(true);
+            }
         }
     }
     
