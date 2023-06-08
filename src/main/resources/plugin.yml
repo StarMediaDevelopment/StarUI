@@ -3,3 +3,5 @@ version: ${project.version}
 name: StarUI
 api-version: 1.19
 author: Firestar311
+commands: 
+  testgui:

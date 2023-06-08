@@ -12,6 +12,7 @@ public class StarUI extends JavaPlugin {
     public void onEnable() {
         uiManager = new UIManager(this);
         Bukkit.getServicesManager().register(UIManager.class, uiManager, this, ServicePriority.Normal);
+        getCommand("testgui").setExecutor(new TestCmd(uiManager));
     }
     
     public static UIManager getUiManager() {

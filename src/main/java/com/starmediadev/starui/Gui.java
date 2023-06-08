@@ -1,7 +1,7 @@
 package com.starmediadev.starui;
 
+import com.starmediadev.plugins.starcore.lib.ColorUtils;
 import com.starmediadev.starlib.collection.IncrementalMap;
-import com.starmediadev.starmclib.ColorUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.*;
@@ -12,7 +12,6 @@ import java.util.stream.Stream;
 
 public class Gui implements InventoryHandler {
     
-    protected UUID player;
     private UIManager uiManager;
     protected String title;
     protected int rows;
@@ -21,12 +20,11 @@ public class Gui implements InventoryHandler {
     protected Map<Integer, Slot> slots = new HashMap<>();
     protected Inventory inventory;
     
-    public Gui(UUID uuid, UIManager uiManager, String title, int rows) {
-        this(uuid, uiManager, title, rows, new GuiOptions());
+    public Gui(UIManager uiManager, String title, int rows) {
+        this(uiManager, title, rows, new GuiOptions());
     }
     
-    public Gui(UUID uuid, UIManager uiManager, String title, int rows, GuiOptions options) {
-        this.player = uuid;
+    public Gui(UIManager uiManager, String title, int rows, GuiOptions options) {
         this.uiManager = uiManager;
         this.title = title;
         this.rows = rows;
