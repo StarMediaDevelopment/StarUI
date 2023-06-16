@@ -14,6 +14,18 @@ public class TestListener implements Listener {
     }
     
     @EventHandler
+    public void onOpen(InventoryOpenEvent e) {
+        plugin.getLogger().info("InventoryOpenEvent");
+        plugin.getLogger().info("  Player: " + e.getPlayer().getName());
+    }
+    
+    @EventHandler
+    public void onClose(InventoryCloseEvent e) {
+        plugin.getLogger().info("InventoryCloseEvent");
+        plugin.getLogger().info("  Player: " + e.getPlayer().getName());
+    }
+    
+    @EventHandler
     public void onClick(InventoryClickEvent e) {
         plugin.getLogger().info("InventoryClickEvent");
         plugin.getLogger().info("  Player: " + e.getWhoClicked().getName());
