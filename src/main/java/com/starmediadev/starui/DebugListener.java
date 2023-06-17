@@ -1,33 +1,51 @@
 package com.starmediadev.starui;
 
+import com.starmediadev.starui.handler.InventoryHandler;
 import org.bukkit.event.*;
 import org.bukkit.event.inventory.*;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.inventory.*;
 
-public class TestListener implements Listener {
+public class DebugListener implements Listener {
     
-    private JavaPlugin plugin;
+    private StarUI plugin;
+    private GuiManager guiManager;
     
-    public TestListener(JavaPlugin plugin) {
+    public DebugListener(StarUI plugin) {
         this.plugin = plugin;
+        guiManager = plugin.getServer().getServicesManager().getRegistration(GuiManager.class).getProvider();
+    }
+    
+    private InventoryHandler getStarUIHandler(Inventory inventory) {
+        return guiManager.getHandler(inventory);
     }
     
     @EventHandler
     public void onOpen(InventoryOpenEvent e) {
+        if (!plugin.isDebug()) {
+            return;
+        }
         plugin.getLogger().info("InventoryOpenEvent");
+        printStarUIInfo(e.getInventory());
         plugin.getLogger().info("  Player: " + e.getPlayer().getName());
     }
     
     @EventHandler
     public void onClose(InventoryCloseEvent e) {
+        if (!plugin.isDebug()) {
+            return;
+        }
         plugin.getLogger().info("InventoryCloseEvent");
         plugin.getLogger().info("  Player: " + e.getPlayer().getName());
+        printStarUIInfo(e.getInventory());
     }
     
     @EventHandler
     public void onClick(InventoryClickEvent e) {
+        if (!plugin.isDebug()) {
+            return;
+        }
         plugin.getLogger().info("InventoryClickEvent");
+        printStarUIInfo(e.getInventory());
         plugin.getLogger().info("  Player: " + e.getWhoClicked().getName());
         plugin.getLogger().info("  ClickType: " + e.getClick().name());
         plugin.getLogger().info("  Slot: " + e.getSlot());
@@ -43,7 +61,11 @@ public class TestListener implements Listener {
     
     @EventHandler
     public void onDrag(InventoryDragEvent e) {
+        if (!plugin.isDebug()) {
+            return;
+        }
         plugin.getLogger().info("InventoryDragEvent");
+        printStarUIInfo(e.getInventory());
         plugin.getLogger().info("  Player: " + e.getWhoClicked().getName());
         plugin.getLogger().info("  DragType: " + e.getType().name());
         ItemStack cursor = e.getCursor();
@@ -58,7 +80,19 @@ public class TestListener implements Listener {
     
     @EventHandler
     public void onInteract(InventoryInteractEvent e) {
+        if (!plugin.isDebug()) {
+            return;
+        }
         plugin.getLogger().info("InventoryInteractEvent");
+        printStarUIInfo(e.getInventory());
         plugin.getLogger().info("  Player: " + e.getWhoClicked().getName());
+    }
+    
+    private void printStarUIInfo(Inventory inventory) {
+        InventoryHandler handler = getStarUIHandler(inventory);
+        plugin.getLogger().info("  StarUI Inventory: " + (handler != null));
+        if (handler != null) {
+            plugin.getLogger().info("  StarUI Handler Class: " + handler.getClass().getName());
+        }
     }
 }

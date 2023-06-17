@@ -1,4 +1,6 @@
-package com.starmediadev.starui;
+package com.starmediadev.starui.gui;
+
+import com.starmediadev.starui.element.Element;
 
 public class Slot {
     
