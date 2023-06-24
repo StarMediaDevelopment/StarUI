@@ -13,6 +13,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Map;
 
+/**
+ * Main plugin class of StarUI. This registers a default GuiManager to the Bukkit ServicesManager as well as providng a getter method<br>
+ */
 public class StarUI extends JavaPlugin {
     
     private GuiManager guiManager;
@@ -91,10 +94,16 @@ public class StarUI extends JavaPlugin {
         return true;
     }
 
+    /**
+     * @return The GuiManager instance
+     */
     public GuiManager getGuiManager() {
         return guiManager;
     }
 
+    /**
+     * @return If debug mode is toggled on or off - Internal use
+     */
     public boolean isDebug() {
         return debug;
     }

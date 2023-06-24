@@ -11,12 +11,20 @@ import org.bukkit.inventory.*;
 
 import java.util.*;
 
+/**
+ * A parent class for guis that provide some default behavior
+ */
 public class InventoryGUI implements InventoryHandler {
     
     protected final Inventory inventory;
     protected final Map<Integer, Slot> slots = new TreeMap<>();
     private final int rows;
-    
+
+    /**
+     * Constructs a new InventoryGUI
+     * @param rows The amount of rows, 1-6
+     * @param title The title of the Inventory - Only uses default Bukkit color code translation
+     */
     public InventoryGUI(int rows, String title) {
         this.rows = rows;
         if (rows > 6) {
@@ -27,22 +35,42 @@ public class InventoryGUI implements InventoryHandler {
             slots.put(i, new Slot(i));
         }
     }
-    
+
+    /**
+     * Sets an element in the Gui
+     * @param index The index starting from 0
+     * @param element The element to set
+     */
     public void setElement(int index, Element element) {
         Slot slot = this.slots.get(index);
         if (slot != null) {
             slot.setElement(element);
         }
     }
-    
+
+    /**
+     * Sets an element in the Gui
+     * @param row The row of the element 0 to rows -1
+     * @param column The column of the element 0 to 8
+     * @param element The element
+     */
     public void setElement(int row, int column, Element element) {
         setSlotValue(row, column, element);
     }
-    
+
+    /**
+     * Removes an element
+     * @param row The row of the element 0 to rows -1
+     * @param column The column of the element 0 to 8
+     */
     public void removeElement(int row, int column) {
         setSlotValue(row, column, null);
     }
-    
+
+    /**
+     * Adds an element to the Gui, finding the first empty slot or the first slot with an element with the replacable flag set to true.
+     * @param element The element to add
+     */
     public void addElement(Element element) {
         for (Slot slot : this.slots.values()) {
             if (slot.getElement() == null) {
@@ -67,7 +95,11 @@ public class InventoryGUI implements InventoryHandler {
         Slot slot = slots.get(row * 9 + column);
         slot.setElement(value);
     }
-    
+
+    /**
+     * Method that populates the actual {@link Inventory}, called when it is opened by a player
+     * @param player The player
+     */
     public void decorate(Player player) {
         this.slots.forEach((index, slot) -> {
             if (slot.getElement() != null) {
@@ -77,7 +109,10 @@ public class InventoryGUI implements InventoryHandler {
             }
         });
     }
-    
+
+    /**
+     * @return The Inventory Instance
+     */
     public Inventory getInventory() {
         return inventory;
     }

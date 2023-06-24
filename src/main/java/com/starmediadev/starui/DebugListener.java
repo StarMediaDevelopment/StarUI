@@ -5,6 +5,9 @@ import org.bukkit.event.*;
 import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.*;
 
+/**
+ * Just a debug listener, ignore
+ */
 public class DebugListener implements Listener {
     
     private StarUI plugin;
