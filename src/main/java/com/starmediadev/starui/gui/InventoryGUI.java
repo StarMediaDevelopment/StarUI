@@ -1,6 +1,7 @@
 package com.starmediadev.starui.gui;
 
 import com.starmediadev.starui.element.Element;
+import com.starmediadev.starui.element.FillerElement;
 import com.starmediadev.starui.element.button.Button;
 import com.starmediadev.starui.handler.InventoryHandler;
 import org.bukkit.*;
@@ -27,12 +28,31 @@ public class InventoryGUI implements InventoryHandler {
         }
     }
     
+    public void setElement(int index, Element element) {
+        Slot slot = this.slots.get(index);
+        if (slot != null) {
+            slot.setElement(element);
+        }
+    }
+    
     public void setElement(int row, int column, Element element) {
         setSlotValue(row, column, element);
     }
     
     public void removeElement(int row, int column) {
         setSlotValue(row, column, null);
+    }
+    
+    public void addElement(Element element) {
+        for (Slot slot : this.slots.values()) {
+            if (slot.getElement() == null) {
+                slot.setElement(element);
+            } else if (slot.getElement() instanceof FillerElement fillerElement) {
+                if (fillerElement.isReplaceable()) {
+                    slot.setElement(element);
+                }
+            }
+        }
     }
     
     private void setSlotValue(int row, int column, Element value) {

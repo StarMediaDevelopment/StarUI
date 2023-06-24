@@ -11,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.*;
 
 public class GuiManager implements Listener {
-    public JavaPlugin plugin;
+    private JavaPlugin plugin;
     private Map<Inventory, InventoryHandler> activeHandlers = new HashMap<>();
     
     public GuiManager(JavaPlugin plugin) {
