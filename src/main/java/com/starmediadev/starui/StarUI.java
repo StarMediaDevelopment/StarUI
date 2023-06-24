@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class StarUI extends JavaPlugin {
     
-    public GuiManager guiManager;
+    private GuiManager guiManager;
     private boolean debug;
     
     @Override
@@ -90,7 +90,11 @@ public class StarUI extends JavaPlugin {
         
         return true;
     }
-    
+
+    public GuiManager getGuiManager() {
+        return guiManager;
+    }
+
     public boolean isDebug() {
         return debug;
     }
