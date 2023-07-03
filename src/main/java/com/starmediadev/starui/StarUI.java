@@ -20,16 +20,34 @@ public class StarUI extends JavaPlugin {
     
     private GuiManager guiManager;
     private boolean debug;
+    private UIMetrics metrics;
     
     @Override
     public void onEnable() {
+        getConfig().addDefault("bstats", true);
+        getConfig().options().copyDefaults(true);
+        saveDefaultConfig();
+        saveConfig();
         guiManager = new GuiManager(this);
         guiManager.setup();
         getServer().getServicesManager().register(GuiManager.class, guiManager, this, ServicePriority.Normal);
         getServer().getPluginManager().registerEvents(new DebugListener(this), this);
-        //TODO Have an InsertElement that allows insertion of items and allows keeping it on page moving etc...
+        if (getConfig().getBoolean("bstats")) {
+            if (getServer().getPluginManager().getPlugin("StarCore") == null) {
+                getLogger().severe("Bstats enabled, but StarCore is not found. If you want to have Bstats enabled, please install StarCore.");
+            } else {
+                metrics = new UIMetrics(this, 18968);
+            }
+        }
     }
-    
+
+    @Override
+    public void onDisable() {
+        if (this.metrics != null) {
+            metrics.shutdown();
+        }
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!cmd.getName().equals("starui")) {

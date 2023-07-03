@@ -3,5 +3,6 @@ version: ${project.version}
 name: StarUI
 api-version: 1.20
 author: Firestar311
+softdepend: [StarCore]
 commands: 
   starui:
