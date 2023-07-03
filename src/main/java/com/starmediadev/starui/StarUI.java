@@ -37,6 +37,7 @@ public class StarUI extends JavaPlugin {
                 getLogger().severe("Bstats enabled, but StarCore is not found. If you want to have Bstats enabled, please install StarCore.");
             } else {
                 metrics = new UIMetrics(this, 18968);
+                getLogger().info("Enabled bstats metrics.");
             }
         }
     }
