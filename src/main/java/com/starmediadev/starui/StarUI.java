@@ -20,11 +20,9 @@ public class StarUI extends JavaPlugin {
     
     private GuiManager guiManager;
     private boolean debug;
-    private UIMetrics metrics;
     
     @Override
     public void onEnable() {
-        getConfig().addDefault("bstats", true);
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
         saveConfig();
@@ -32,21 +30,6 @@ public class StarUI extends JavaPlugin {
         guiManager.setup();
         getServer().getServicesManager().register(GuiManager.class, guiManager, this, ServicePriority.Normal);
         getServer().getPluginManager().registerEvents(new DebugListener(this), this);
-        if (getConfig().getBoolean("bstats")) {
-            if (getServer().getPluginManager().getPlugin("StarCore") == null) {
-                getLogger().severe("Bstats enabled, but StarCore is not found. If you want to have Bstats enabled, please install StarCore.");
-            } else {
-                metrics = new UIMetrics(this, 18968);
-                getLogger().info("Enabled bstats metrics.");
-            }
-        }
-    }
-
-    @Override
-    public void onDisable() {
-        if (this.metrics != null) {
-            metrics.shutdown();
-        }
     }
 
     @Override
