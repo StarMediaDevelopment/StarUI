@@ -27,9 +27,10 @@ public class InventoryGUI implements InventoryHandler {
      */
     public InventoryGUI(int rows, String title) {
         this.rows = rows;
-        if (rows > 6) {
-            throw new IllegalArgumentException("You can only have a total of 6 rows in a GUI. You have " + rows);
+        if (rows < 1 || rows > 6) {
+            throw new IllegalArgumentException("Rows value is out of range, it can only be between 1 to 6.");
         }
+        
         this.inventory = Bukkit.createInventory(null, rows * 9, ChatColor.translateAlternateColorCodes('&', title));
         for (int i = 0; i < rows * 9; i++) {
             slots.put(i, new Slot(i));
